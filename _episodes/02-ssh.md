@@ -92,13 +92,6 @@ we can use the remote shell to use the remote computer's files and directories.
 Typing `exit` or Control-D
 terminates the remote shell, and the local client program, and returns us to our previous shell.
 
-In the example below,
-the remote machine's command prompt is `moon>`
-instead of just `$`.
-To make it clearer which machine is doing what,
-we'll indent the commands sent to the remote machine
-and their output.
-
 ~~~
 $ pwd
 ~~~
@@ -109,21 +102,36 @@ $ pwd
 ~~~
 {: .output}
 
+If you're using the Caltech HPC Cluster, use your Caltech username in place of "username" and type
+
 ~~~
-$ ssh vlad@moon.euphoric.edu
+$ ssh username@moon.euphoric.edu
 Password: ********
 ~~~
 {: .bash}
 
+If you're using XSEDE, use your XSEDE username in place of "username" and type
+
 ~~~
-    moon> hostname
+$ ssh username@comet.sdsc.xsede.org
+Password: ********
 ~~~
 {: .bash}
 
+
+If this is the first time logging into the remote system, you might see a message like
+
 ~~~
-    moon
+The authenticity of host 'comet.sdsc.xsede.org (198.202.113.253)' can't be established.
+RSA key fingerprint is SHA256:z2NBrOo633o/lePpqSVDyaLaOODcoU0zn8S2k1xDkW0.
+Are you sure you want to continue connecting (yes/no)?
 ~~~
 {: .output}
+
+This is a security message that protects you from signing into a computer that is impersonating a system you use. Since this is your first time logging into the system, you can say yes and click enter. If you see this message another time, you may want to ask the system owner if a change has been made on the remote system.
+
+You're now terminal is now on the remote system. Check to the left of the prompt to see where you are
+
 
 ~~~
     moon> pwd
@@ -135,17 +143,12 @@ Password: ********
 ~~~
 {: .output}
 
-~~~
-    moon> ls -F
-~~~
-{: .bash}
+
+Let's make a new directory called carpentry and exit
+
 
 ~~~
-    bin/     cheese.txt   dark_side/   rocks.cfg
-~~~
-{: .output}
-
-~~~
+    moon> mkdir carpentry
     moon> exit
 ~~~
 {: .bash}
@@ -167,18 +170,28 @@ we specify the source and destination paths,
 either of which may include computer names.
 If we leave out a computer name,
 `scp` assumes we mean the machine we're running on.
-For example,
-this command copies our latest results to the backup server in the basement,
-printing out its progress as it does so:
+
+Let's copy all of Nell's files from the 2012-07-03 directory to the remote system
 
 ~~~
-$ scp results.dat vlad@backupserver:backups/results-2011-11-11.dat
+$ pwd
+~~
+
+~~~
+/Users/tmorrell/Desktop/data-shell/north-pacific-gyre/2012-07-03
+~~~
+{: .output}
+
+~~
+$ scp * tmorrell@comet.sdsc.xsede.org:carpentry/
 Password: ********
 ~~~
 {: .bash}
 
 ~~~
-results.dat              100%  9  1.0 MB/s 00:00
+NENE01729A.txt             100% 4406   185.8KB/s   00:00    
+NENE01729B.txt             100% 4400   194.1KB/s   00:00  
+...
 ~~~
 {: .output}
 
