@@ -1,6 +1,6 @@
 ---
 title: "Running Bash Scripts on an HPC Cluster"
-teaching:30
+teaching: 30
 exercises: 0
 questions:
 - "How do I run a bash script on a HPC cluster ?"
