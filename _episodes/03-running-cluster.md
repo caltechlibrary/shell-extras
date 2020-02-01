@@ -7,6 +7,8 @@ questions:
 objectives:
 - "Learn the organization of a HPC cluster"
 - "Learn the SLURM scheduler"
+keypoints:
+- "Clusters work like your computer, but with a scheduler"
 ---
 
 Let's ssh back to the cluster, where we're copied Nell's goobash files and the
