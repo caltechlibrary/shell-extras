@@ -17,14 +17,14 @@ keypoints:
 ## Conditionals
 
 You can use conditional statements to test whether something is true or false
-and do a programmatic behavior as a result. Let's go into the molecules
+and do a programatic behavior as a result. Let's go into the molecules
 directory and make a script that will show us molecules with at least a certain number
 of lines. Make a new script called is_big.sh
 
 We know that wc -l gives us the number of lines in a file. Let's save that to a
 variable.
 ~~~
-num=$(wc -l $1)
+num=`wc -l $1`
 ~~~
 {: .bash}
 
@@ -52,7 +52,7 @@ We forgot to check our import. `wc -l` gives us the size and the file name
 which isn't a number. If we redirect the file into wc it will work
 
 ~~~
-num=$(wc -l < $1)
+num=`wc -l < $1`
 ~~~
 {: .bash}
 
