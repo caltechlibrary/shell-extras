@@ -105,10 +105,12 @@ $ pwd
 If you're using the Caltech HPC Cluster, use your Caltech username in place of "username" and type
 
 ~~~
-$ ssh username@moon.euphoric.edu
+$ ssh username@login.hpc.caltech.edu
 Password: ********
 ~~~
 {: .bash}
+
+You'll also need to respond to a Duo two factor authentication prompt.
 
 If you're using XSEDE, use your XSEDE username in place of "username" and type
 
