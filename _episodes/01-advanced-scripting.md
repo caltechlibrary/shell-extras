@@ -14,6 +14,39 @@ keypoints:
 - "Shell scripts can be used to more complicated programming tasks"
 ---
 
+*Instructor note: there are intentional typos in these examples to show the importnace of spaces*
+
+## System information and variables
+
+You can get the current date using the date command. There are lots of
+formatting options, but we're going to go with the recommended year-month-day
+option.
+
+~~~
+date "+%F"
+~~~
+
+Let's make a script that prints out the date. We can save the date in a variable like
+
+~~~
+date = $(date "+%F")
+~~~
+
+You probably got an error like
+
+~~~
+date: illegal time format
+~~~
+
+This is because we had extra spaces around the equals sign. This is a bit confusing, because the error is coming from the variable name we used 'date'. Since there is a space, bash thinks that 'date' variable name is a command we want to run. If you use
+
+~~~
+date=$(date "+%F")
+echo $date
+~~~
+
+You should get the date printed as expected
+
 ## Conditionals
 
 You can use conditional statements to test whether something is true or false
@@ -28,10 +61,23 @@ num=$(wc -l $1)
 ~~~
 {: .bash}
 
-Warning - there is no space around the equals sign. This is important for the
-variable to be defined.
-
 We build an if statement like a loop
+
+~~~
+if ["$num" -gt "5"]
+then
+    echo $1 "is big enough"
+fi
+~~~
+{: .bash}
+
+Does that work? You'll probably get an error
+
+~~~
+[      30: command not found
+~~~
+
+This is again a spacing issue, but the opposite of the earlier one we saw. You need a space after the `[`, otherwise bash thinks it is a command. Once we fix the spacing
 
 ~~~
 if [ "$num" -gt "5" ]
@@ -41,7 +87,7 @@ fi
 ~~~
 {: .bash}
 
-Does that work? You'll probably get an error
+We get a different error
 
 ~~~
 is_big.sh: line 2: :       30 octane.pdb: integer expression expected
@@ -69,19 +115,6 @@ fi
 {: .bash}
 
 Activity: Make the size cutoff generalizabla
-
-## System information
-
-You can get the current date using the date command. There are lots of
-formatting options, but we're going to go with the recommended year-month-day
-option.
-
-~~~
-date "+%F"
-~~~
-
-Activity: Revise our Nell script to include the date in the output file format.
-It might be helpful to save the date as a variable.
 
 ## System Variables
 
