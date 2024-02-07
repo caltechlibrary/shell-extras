@@ -16,6 +16,79 @@ keypoints:
 
 *Instructor note: there are intentional typos in these examples to show the importnace of spaces*
 
+## Recapping scripting
+
+We're going to use a demonstration script from the shell-novice lesson.
+
+## Nelle's Pipeline: Processing Files
+
+Nelle is now ready to process her data files using `goostats` --- a shell script written by her supervisor.
+This calculates some statistics from a protein sample file, and takes two arguments:
+
+1. an input file (containing the raw data)
+2. an output file (to store the calculated statistics)
+
+Since she's still learning how to use the shell,
+she decides to build up the required commands in stages.
+Her first step is to make sure that she can select the right input files --- remember,
+these are ones whose names end in 'A' or 'B', rather than 'Z'. Starting from her home directory, Nelle types:
+
+~~~
+$ cd north-pacific-gyre
+~~~
+{: .output}
+
+And write a script in nano that will generate an input and output file name
+
+~~~
+$ for datafile in NENE*[AB].txt
+> do
+>     echo $datafile stats-$datafile
+> done
+~~~
+{: .language-bash}
+
+~~~
+NENE01729A.txt stats-NENE01729A.txt
+NENE01729B.txt stats-NENE01729B.txt
+NENE01736A.txt stats-NENE01736A.txt
+...
+NENE02043A.txt stats-NENE02043A.txt
+NENE02043B.txt stats-NENE02043B.txt
+~~~
+{: .output}
+
+She hasn't actually run `goostats` yet,
+but now she's sure she can select the right files and generate the right output filenames.
+
+~~~
+$ for datafile in NENE*[AB].txt
+ do
+     bash goostats $datafile stats-$datafile
+ done
+~~~
+{: .language-bash}
+
+When she presses Enter,
+the shell runs the modified command.
+However, nothing appears to happen --- there is no output.
+After a moment, Nelle realizes that since her script doesn't print anything to the screen any longer,
+she has no idea whether it is running, much less how quickly.
+She kills the running command by typing `Ctrl-C`,
+uses up-arrow to repeat the command,
+and edits it to read:
+
+~~~
+$ for datafile in NENE*[AB].txt
+ do
+     echo $datafile
+     bash goostats $datafile stats-$datafile
+ done
+~~~
+{: .language-bash}
+
+
+
 ## System information and variables
 
 You can get the current date using the date command. There are lots of
