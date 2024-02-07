@@ -64,7 +64,7 @@ but now she's sure she can select the right files and generate the right output 
 ~~~
 $ for datafile in NENE*[AB].txt
  do
-     bash goostats $datafile stats-$datafile
+     bash goostats.sh $datafile stats-$datafile
  done
 ~~~
 {: .language-bash}
