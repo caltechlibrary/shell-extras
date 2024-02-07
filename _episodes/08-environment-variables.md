@@ -15,6 +15,15 @@ Those variables control its execution,
 so by changing their values
 you can change how the shell and other programs behave.
 
+On an HPC cluster, software is usually installed in modules. For example if you want to use pip to install a python package, type
+
+`
+module load python3/3.8.5
+`
+
+You can add this to a .bashrc file to run automatically.
+
+
 Let's start by running the command `set` and looking at some of the variables in a typical shell session:
 
 ~~~
