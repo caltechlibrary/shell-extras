@@ -16,9 +16,45 @@ keypoints:
 
 *Instructor note: there are intentional typos in these examples to show the importnace of spaces*
 
-## Recapping scripting
+## Data Organization
 
-We're going to use a demonstration script from the shell-novice lesson.
+To start the workshop, we need to [download some data files](https://swcarpentry.github.io/shell-novice/data/shell-lesson-data.zip). 
+You'll want to unzip the files some place where you can find them.
+
+Having a file/folder naming convention is the first step for good data management. The library
+[has a great worksheet](https://doi.org/10.7907/894q-zr22) that steps you through lots of options. For this 
+workshop the important metadata is the data and the type of workshop. So open a terminal window and type
+
+`mkdir ~/Documents/2025-03-14-shell-hpc`
+
+where `Documents` is the path to wherever on your computer you want to store your files.
+
+Next we'll need to move our data files into this folder. You'll need to remember where you downloaded and unzipped the `shell-lesson-data`
+zip file. The `north-pacific-gyre` folder has everything we're going to need, and we're going to set up a subfolder arrangement for our data
+
+`cd ~/Documents/2025-03-14-shell-hpc`
+`mkdir data`
+`cp ~/Desktop/shell-lesson-data/north-pacific-gyre/* data/.`
+
+I don't like that the applications are in the data folder, so let's move those out.
+
+`mv data/goo* .`
+
+Let's write a short readme describing the setup.
+
+`nano README.md`
+
+```# Carpentry Shell Lesson Data Analysis
+
+Data copied from the north-pacific-gyre folder in the carpentries shell lesson data downloaded from https://swcarpentry.github.io/shell-novice/data/shell-lesson-data.zip```
+
+We also need a place to put our results
+
+`mkdir results`
+
+## Reviewing scripting
+
+We're going to re-do the demonstration script from the shell-novice lesson with our new structure.
 
 ## Nelle's Pipeline: Processing Files
 
@@ -33,28 +69,25 @@ she decides to build up the required commands in stages.
 Her first step is to make sure that she can select the right input files --- remember,
 these are ones whose names end in 'A' or 'B', rather than 'Z'. Starting from her home directory, Nelle types:
 
-~~~
-$ cd north-pacific-gyre
-~~~
-{: .output}
 
-And write a script in nano that will generate an input and output file name
+Now type `nano run.sh` that will generate an input and output file name
 
 ~~~
-$ for datafile in NENE*[AB].txt
+$ for datafile in data/NENE*[AB].txt
 > do
->     echo $datafile stats-$datafile
+>     filename=$(basename "$datafile")
+>     echo $datafile results/stats-$filename
 > done
 ~~~
 {: .language-bash}
 
 ~~~
-NENE01729A.txt stats-NENE01729A.txt
-NENE01729B.txt stats-NENE01729B.txt
-NENE01736A.txt stats-NENE01736A.txt
+data/NENE01729A.txt results/stats-NENE01729A.txt
+data/NENE01729B.txt results/stats-NENE01729B.txt
+data/NENE01736A.txt results/stats-NENE01736A.txt
 ...
-NENE02043A.txt stats-NENE02043A.txt
-NENE02043B.txt stats-NENE02043B.txt
+data/NENE02043A.txt results/stats-NENE02043A.txt
+data/NENE02043B.txt results/stats-NENE02043B.txt
 ~~~
 {: .output}
 
@@ -64,7 +97,8 @@ but now she's sure she can select the right files and generate the right output 
 ~~~
 $ for datafile in NENE*[AB].txt
  do
-     bash goostats.sh $datafile stats-$datafile
+     filename=$(basename "$datafile")
+     bash goostats.sh $datafile results/stats-$filename
  done
 ~~~
 {: .language-bash}
@@ -81,8 +115,9 @@ and edits it to read:
 ~~~
 $ for datafile in NENE*[AB].txt
  do
-     echo $datafile
-     bash goostats $datafile stats-$datafile
+     filename=$(basename "$datafile")
+     echo $filename
+     bash goostats.sh $datafile results/stats-$filename
  done
 ~~~
 {: .language-bash}
