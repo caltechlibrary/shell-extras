@@ -62,15 +62,6 @@ this time the scheduler will kill it.
 ~~~
 {: .bash}
 
-The next setting will depend on what cluster you're using. For comet, you need
-to provide the queue where the job will run. We'll use debug because we want
-the job to run quickly and we don't need many resources
-
-~~~
-#SBATCH --partition=debug
-~~~
-{: .bash}
-
 The Caltech HPC cluster doesn't have queues, and instead uses a quality of
 service flag to indicate test jobs
 
