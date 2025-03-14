@@ -131,5 +131,32 @@ $ cat goostats.31263068.comet-14-01.out
 and you'll see the same output as you would if you ran the script on the
 command line.
 
+Let's say we want to share out results with CaltechDATA. We'll start by installing the caltechdata_api command line tool
+
+~~~
+$ pip install caltechdata_api
+~~~
+{: .bash}
+
+We're going to work on the CaltechDATA test system. Log into data.caltechlibrary.dev, go to your username in the upper right hand corner, and click on "Applications".
+
+Then in the "Personal access token" section select "Add token". Save the token somewhere safe; it's like a password.
+
+Let's say we want to share our results.
+
+~~~
+$ caltechdata_api -test
+~~~
+{: .bash}
+
+We're going to "create" a new record. You'll need to enter your CaltechDATA test token, which will be saved on the HPC cluster
+
+We're going to "create" metadata for our record. Enter a title and description for your files. Select your desired license and your ORCID identifier.
+
+You can directly upload small files, like our script. For large files, we'll want to directly upload to S3. 
+
+When you create the record, it will show up as a draft in CaltechDATA. You'll can review the record, or upload files to S3.
+
+When you want to link the S3 files, re-run `caltechdata_api` and select the `edit` option. When you get to files, pick `link`. When you publish in CaltechDATA, the linked files will now appear.
 
 {% include links.md %}
