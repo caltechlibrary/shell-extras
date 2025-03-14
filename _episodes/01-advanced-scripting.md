@@ -73,7 +73,8 @@ these are ones whose names end in 'A' or 'B', rather than 'Z'. Starting from her
 Now type `nano run.sh` that will generate an input and output file name
 
 ~~~
-$ for datafile in data/NENE*[AB].txt
+$  #!/bin/bash 
+   for datafile in data/NENE*[AB].txt
 > do
 >     filename=$(basename "$datafile")
 >     echo $datafile results/stats-$filename
