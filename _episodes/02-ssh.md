@@ -145,27 +145,9 @@ You're now terminal is now on the remote system. Check to the left of the prompt
 ~~~
 {: .output}
 
-
-Let's make a new directory called carpentry and exit
-
-
-~~~
-    moon> mkdir carpentry
-    moon> exit
-~~~
-{: .bash}
-
-~~~
-$ pwd
-~~~
-{: .bash}
-
-~~~
-/users/vlad
-~~~
-{: .output}
-
 ## Copying files to, and from a remote machine using `scp`
+
+Let's open up a new terminal window, and transfer some files to the cluster
 
 To copy a file,
 we specify the source and destination paths,
@@ -173,26 +155,22 @@ either of which may include computer names.
 If we leave out a computer name,
 `scp` assumes we mean the machine we're running on.
 
-Let's copy all of Nell's files from the 2012-07-03 directory to the remote system
+Let's copy all the files we just created to the remote system
 
 ~~~
-$ pwd
+cd ~/Documents
 ~~
 
-~~~
-/Users/tmorrell/Desktop/data-shell/north-pacific-gyre/2012-07-03
-~~~
-{: .output}
 
 ~~
-$ scp * tmorrell@comet.sdsc.xsede.org:carpentry/
+$ scp -r 2025-03-14-shell-hpc tmorrell@login.hpc.caltech.edu:.
 Password: ********
 ~~~
 {: .bash}
 
 ~~~
-NENE01729A.txt             100% 4406   185.8KB/s   00:00    
-NENE01729B.txt             100% 4400   194.1KB/s   00:00  
+goodiff.sh                      100%  345    44.3KB/s   00:00    
+run.sh                          100%  150    18.2KB/s   00:00
 ...
 ~~~
 {: .output}
@@ -231,22 +209,8 @@ $ cp results.dat vlad@backupserver
 
 Copying a whole directory betwen remote machines uses the same syntax as the `cp` command:
 we just use the `-r` option to signal that we want copying to be recursively.
-For example,
-this command copies all of our results from the backup server to our laptop:
 
-~~~
-$ scp -r vlad@backupserver:backups ./backups
-Password: ********
-~~~
-{: .bash}
-
-~~~
-results-2011-09-18.dat              100%  7  1.0 MB/s 00:00
-results-2011-10-04.dat              100%  9  1.0 MB/s 00:00
-results-2011-10-28.dat              100%  8  1.0 MB/s 00:00
-results-2011-11-11.dat              100%  9  1.0 MB/s 00:00
-~~~
-{: .output}
+We can now go back to the other terminal window to see that all our files transferred.
 
 ## Running commands on a remote machine using `ssh`
 
