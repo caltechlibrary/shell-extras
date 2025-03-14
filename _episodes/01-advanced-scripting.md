@@ -44,9 +44,12 @@ Let's write a short readme describing the setup.
 
 `nano README.md`
 
-```# Carpentry Shell Lesson Data Analysis
+```
+# Carpentry Shell Lesson Data Analysis
 
-Data copied from the north-pacific-gyre folder in the carpentries shell lesson data downloaded from https://swcarpentry.github.io/shell-novice/data/shell-lesson-data.zip```
+Data copied from the north-pacific-gyre folder in the carpentries shell lesson data downloaded from https://swcarpentry.github.io/shell-novice/data/shell-lesson-data.zip
+
+```
 
 We also need a place to put our results
 
